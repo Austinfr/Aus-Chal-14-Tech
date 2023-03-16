@@ -1,18 +1,16 @@
 const router = require('express').Router();
-const { User } = require('../models');
-const withAuth = require('../utils/auth');
+const { Post } = require('../models');
+const withAuth = require('../util/auth');
 
-router.get('/', withAuth, async (req, res) => {
+//homepage route
+router.get('/', async (req, res) => {
   try {
-    const userData = await User.findAll({
-      attributes: { exclude: ['password'] },
-      order: [['name', 'ASC']],
-    });
+    const postData = await Post.findAll();
 
-    const users = userData.map((project) => project.get({ plain: true }));
+    const posts = postData.map((project) => project.get({ plain: true }));
 
     res.render('homepage', {
-      users,
+      posts,
       logged_in: req.session.logged_in,
     });
   } catch (err) {
@@ -20,13 +18,24 @@ router.get('/', withAuth, async (req, res) => {
   }
 });
 
+//dashboard route
+router.get('/dashboard', withAuth, (req, res) => {
+
+});
+
+//login route
 router.get('/login', (req, res) => {
   if (req.session.logged_in) {
-    res.redirect('/');
+    res.redirect('/dashboard');
     return;
   }
 
   res.render('login');
+});
+
+//signup route
+router.get('/sign-up', (req, res) => {
+  res.render('signup');
 });
 
 module.exports = router;

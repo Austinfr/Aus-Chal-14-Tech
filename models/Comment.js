@@ -18,6 +18,14 @@ Comment.init(
         timestamp: {
             type: DataTypes.DATE,
             defaultValue: DataTypes.NOW
+        },
+        post_id: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            references: {
+                model: Post,
+                key: id
+            }
         }
     },
     {
@@ -28,4 +36,4 @@ Comment.init(
     }
 );
 
-module.exports = { Comment };
+module.exports = Comment;
