@@ -1,1 +1,7 @@
 <h1>Your Dashboard</h1>
+
+{{#each post}}
+    <!-- passing into the template so that I don't have to repeat -->
+    {{> post-template title=title postStamp=postStamp content=content  }}
+
+{{/each}}

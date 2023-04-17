@@ -1,13 +1,7 @@
 <h1>The Tech Blog</h1>
 
 {{#each posts}}
-
-    <div class="">
-        <div class="">
-            <h2>{{title}}</h2>
-            <p>{{postStamp}}</p>
-        </div>
-        <p>{{text}}</p>
-    </div>
+    <!-- passing into the template so that I don't have to repeat -->
+    {{> post-template title=title postStamp=postStamp content=content  }}
 
 {{/each}}
