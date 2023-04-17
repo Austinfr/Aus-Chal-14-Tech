@@ -11,7 +11,8 @@ router.get('/', async (req, res) => {
     const posts =  postData.map((post) => post.get({ plain: true }));
 
     res.render('homepage', {
-      posts
+      posts,
+      logged_in: req.session.logged_in
     });
 
   } catch (err) {
@@ -30,9 +31,11 @@ router.get('/dashboard', withAuth, async(req, res) => {
     });
 
     const posts = postData.map((post) => post.get({ plain: true }));
+    console.log(posts);
 
     res.render('dashboard', {
-      posts
+      posts,
+      logged_in: req.session.logged_in
     });
     
   } catch(err){
@@ -43,12 +46,12 @@ router.get('/dashboard', withAuth, async(req, res) => {
 
 //login route
 router.get('/login', (req, res) => {
-  if(!req.session.logged_in){
-    res.redirect('/login');
+  if(req.session.logged_in){
+    res.redirect('/dashboard');
     return;
   }
 
-  res.redirect('/dashboard');
+  res.render('login');
 });
 
 //signup route
