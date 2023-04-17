@@ -3,7 +3,7 @@ const { Post, Comment } = require('../../models');
 
 router.post('/', async (req, res) => {
     try {
-        
+
         let response = Post.create(req.body);
 
         if(!response.ok){

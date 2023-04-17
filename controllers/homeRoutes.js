@@ -31,7 +31,6 @@ router.get('/dashboard', withAuth, async(req, res) => {
     });
 
     const posts = postData.map((post) => post.get({ plain: true }));
-    console.log(posts);
 
     res.render('dashboard', {
       posts,
@@ -57,6 +56,24 @@ router.get('/login', (req, res) => {
 //signup route
 router.get('/sign-up', (req, res) => {
   res.render('signup');
+});
+
+router.get('/post/:id', async (req, res) => {
+  try {
+    
+    let postData = await Post.findByPk(req.params.id);
+
+    let posts = [postData.get({ plain:true })];
+
+    res.render('homepage', {
+      post,
+      logged_in: req.session.logged_in,
+      addComment: true
+    });
+
+  } catch (error) {
+    res.status(500).json(error);
+  }
 });
 
 module.exports = router;
