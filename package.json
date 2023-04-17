@@ -7,7 +7,7 @@
     "example": "example"
   },
   "scripts": {
-    "seed": "node seeds/seeds.js",
+    "seed": "node seeds/seed.js",
     "start": "node server.js"
   },
   "repository": {

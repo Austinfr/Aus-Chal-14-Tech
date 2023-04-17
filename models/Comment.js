@@ -23,14 +23,17 @@ Comment.init(
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
-                model: Post,
-                key: id
+                model: 'Post',
+                key: 'id'
             }
         }
     },
     {
         sequelize,
-        timestamps: true,
+        timestamps: {
+            createdAt: true,
+            updatedAt: false
+        },
         freezeTableName: true,
         modelName: 'comment'
     }
