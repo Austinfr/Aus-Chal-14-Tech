@@ -2,16 +2,18 @@ const router = require('express').Router();
 const { Post, User } = require('../models');
 const withAuth = require('../util/auth');
 
+
 //homepage route
 router.get('/', async (req, res) => {
   try {
     const postData = await Post.findAll();
 
-    const posts = postData.map((post) => post.get({ plain: true }));
+    const posts =  postData.map((post) => post.get({ plain: true }));
 
     res.render('homepage', {
       posts
     });
+
   } catch (err) {
     res.status(500).json(err);
   }
@@ -27,7 +29,7 @@ router.get('/dashboard', withAuth, async(req, res) => {
       }
     });
 
-    const posts = postData.map((post) => post.get({plain:true}));
+    const posts = postData.map((post) => post.get({ plain: true }));
 
     res.render('dashboard', {
       posts
@@ -41,11 +43,12 @@ router.get('/dashboard', withAuth, async(req, res) => {
 
 //login route
 router.get('/login', (req, res) => {
-  if(req.session.logged_in){
-    res.render('/dashboard');
+  if(!req.session.logged_in){
+    res.redirect('/login');
+    return;
   }
 
-  res.render('login');
+  res.redirect('/dashboard');
 });
 
 //signup route

@@ -1,7 +1,9 @@
 <h1>Your Dashboard</h1>
 
-{{#each post}}
+{{#each posts}}
     <!-- passing into the template so that I don't have to repeat -->
     {{> post-template title=title postStamp=postStamp content=content  }}
 
 {{/each}}
+
+<button class="bg-orange-900">+ New Post</button>

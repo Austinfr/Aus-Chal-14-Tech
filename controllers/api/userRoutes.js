@@ -7,7 +7,11 @@ router.post('/', async (req, res) => {
     let response = await User.create(req.body);
 
     if(response.ok){
+      res.session.user_id = await User.findOne({where: { email: req.body.email }}).id;
+      res.session.logged_in = true;
 
+      res.status(200);
+      res.redirect('/dashboard');
     }
 
   } catch (err){

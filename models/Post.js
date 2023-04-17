@@ -26,6 +26,10 @@ Post.init(
                 model: 'User',
                 key: 'id'
             }
+        },
+        postStamp: {
+            type: DataTypes.STRING,
+            allowNull: false
         }
     },
     {
