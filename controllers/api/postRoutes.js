@@ -18,17 +18,21 @@ router.post('/', async (req, res) => {
     }
 });
 
-router.post('/comment', async (req, res) => {
+router.post('/:id/comments', async (req, res) => {
     try {
         
-        let response = await Comment.create(req.body);
+        let response = await Comment.create({
+            content: req.body.content,
+            user_id: req.session.user_id,
+            post_id: req.params.id,
+        });
 
         if(!response.ok){
             res.status(500).json({message: 'Comment not formatted correctly'});
             return;
         }
 
-        res.status(200);
+        res.redirect(`/post/${req.params.id}`);
 
     } catch (error) {
         res.status(500).json(error);

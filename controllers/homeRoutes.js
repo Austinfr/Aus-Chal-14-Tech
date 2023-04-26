@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Post, User } = require('../models');
+const { Post } = require('../models');
 const withAuth = require('../util/auth');
 
 
@@ -61,14 +61,13 @@ router.get('/sign-up', (req, res) => {
 router.get('/post/:id', async (req, res) => {
   try {
     
-    let postData = await Post.findByPk(req.params.id);
+    let postData = await Post.findByPk(req.params.id, { include: Comment });
 
-    let posts = [postData.get({ plain:true })];
+    let post = postData.map((post) => post.get({ plain: true }));
 
-    res.render('homepage', {
+    res.render('post', { 
       post,
-      logged_in: req.session.logged_in,
-      addComment: true
+      logged_in: res.session.logged_in
     });
 
   } catch (error) {

@@ -1,0 +1,23 @@
+<div class="blog-post">
+  <h1>{{post.title}}</h1>
+  <p>{{post.content}}</p>
+  {{#if post.comments.length}}
+    <h2>Comments</h2>
+    {{#each post.comments}}
+      <div class="comment">
+        <p>{{this.content}}</p>
+        <p>By {{this.User.username}} on {{moment(this.createdAt).format('MMMM Do YYYY, h:mm:ss a')}}</p>
+      </div>
+    {{/each}}
+  {{/if}}
+  {{#if logged_in}}
+  <h2>Add a Comment</h2>
+  <form action="/post/{{post.id}}/comments" method="post">
+    <div class="form-group">
+      <label for="content">Content</label>
+      <textarea id="content" name="content" class="form-control" required></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+  {{/if}}
+</div>
