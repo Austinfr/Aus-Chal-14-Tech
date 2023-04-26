@@ -7,7 +7,7 @@ router.post('/', async (req, res) => {
         let response = Post.create(req.body);
 
         if(!response.ok){
-            res.status(500).json({message: 'post not formatted correctly'});
+            res.status(500).json({message: 'Post not formatted correctly'});
             return;
         }
 
@@ -22,6 +22,13 @@ router.post('/comment', async (req, res) => {
     try {
         
         let response = await Comment.create(req.body);
+
+        if(!response.ok){
+            res.status(500).json({message: 'Comment not formatted correctly'});
+            return;
+        }
+
+        res.status(200);
 
     } catch (error) {
         res.status(500).json(error);
