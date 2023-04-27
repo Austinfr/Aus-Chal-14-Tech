@@ -58,13 +58,19 @@ router.get('/sign-up', (req, res) => {
   res.render('signup');
 });
 
+// Render the create post form
+router.get('/newpost', withAuth, (req, res) => {
+  res.render('create-post');
+});
+
+//for getting a specific post
 router.get('/post/:id', async (req, res) => {
   try {
     
     let postData = await Post.findByPk(req.params.id, { include: Comment });
 
     let post = postData.map((post) => post.get({ plain: true }));
-
+    console.log(post);
     res.render('post', { 
       post,
       logged_in: res.session.logged_in

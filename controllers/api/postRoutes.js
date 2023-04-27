@@ -1,20 +1,24 @@
 const router = require('express').Router();
-const { Post, Comment } = require('../../models');
+const { Post, User, Comment } = require('../../models');
 
+// Handle create post form submission
 router.post('/', async (req, res) => {
+    const { title, content } = req.body;
+    const user_id = req.session.user_id;
+    let now = new Date();
+
+    let userData = await User.findByPk(user_id);
+    let user = userData.get({plain: true});
+
+    let postStamp = `Created by ${user.name} on ${now.getMonth()+1}/${now.getDate()}/${now.getFullYear()}`
+  
     try {
-
-        let response = Post.create(req.body);
-
-        if(!response.ok){
-            res.status(500).json({message: 'Post not formatted correctly'});
-            return;
-        }
-
-        res.status(200);
-
+      // Create a new post for the current user
+      const post = await Post.create({ title, content, user_id, postStamp});
+      res.redirect(`/posts/${post.id}`);
     } catch (err) {
-        res.status(500).json(err);
+      console.error(err);
+      res.status(500).send('Unable to create post');
     }
 });
 

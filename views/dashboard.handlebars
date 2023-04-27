@@ -1,9 +1,18 @@
 <h1>Your Dashboard</h1>
 
-{{#each posts}}
-    <!-- passing into the template so that I don't have to repeat -->
-    {{> post-template title=title postStamp=postStamp content=content id=id }}
+<div class="dashboard-container">
+  <h2>My Posts</h2>
+  {{#if posts}}
+    <ul class="post-list">
+      {{#each posts}}
+        <li>
+            {{> post-template title=title postStamp=postStamp content=content id=id }}
+        </li>
+      {{/each}}
+    </ul>
+  {{else}}
+    <p>You have not created any posts yet.</p>
+  {{/if}}
+  <a href="/newpost" class="create-post-btn">Create New Post</a>
+</div>
 
-{{/each}}
-
-<button class="">+ New Post</button>
