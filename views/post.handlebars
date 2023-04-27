@@ -12,7 +12,7 @@
   {{/if}}
   {{#if logged_in}}
   <h2>Add a Comment</h2>
-  <form action="/post/{{post.id}}/comments" method="post">
+  <form action="/api/post/{{post.id}}/comments" method="post">
     <div class="form-group">
       <label for="content">Content</label>
       <textarea id="content" name="content" class="form-control" required></textarea>

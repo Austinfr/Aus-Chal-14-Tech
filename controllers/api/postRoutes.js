@@ -15,23 +15,21 @@ router.post('/', async (req, res) => {
     try {
       // Create a new post for the current user
       const post = await Post.create({ title, content, user_id, postStamp});
-      res.redirect(`/posts/${post.id}`);
+      res.redirect(`/dashboard`);
     } catch (err) {
-      console.error(err);
       res.status(500).send('Unable to create post');
     }
 });
 
 router.post('/:id/comments', async (req, res) => {
     try {
-        
         let response = await Comment.create({
             content: req.body.content,
             user_id: req.session.user_id,
             post_id: req.params.id,
         });
 
-        if(!response.ok){
+        if(!response.get({ plain:true })){
             res.status(500).json({message: 'Comment not formatted correctly'});
             return;
         }

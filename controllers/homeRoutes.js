@@ -67,6 +67,8 @@ router.get('/newpost', withAuth, (req, res) => {
 router.get('/post/:id', async (req, res) => {
   try {
     let postData = await Post.findByPk(req.params.id);
+    console.log(postData);
+    await postData.comments.then(results => {console.log(results)});
 
     let post = postData.get({ plain: true });
     
