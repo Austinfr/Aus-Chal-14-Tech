@@ -1,9 +1,12 @@
 <div class="blog-post">
-  <h1>{{post.title}}</h1>
+  <div class="post-head">
+    <h1>{{post.title}}</h1>
+    <p>{{post.postStamp}}</p>
+  </div>
   <p>{{post.content}}</p>
-  {{#if post.comments.length}}
+  {{#if comments.length}}
     <h2>Comments</h2>
-    {{#each post.comments}}
+    {{#each comments}}
       <div class="comment">
         <p>{{this.content}}</p>
         <p>{{this.timestamp}}</p>

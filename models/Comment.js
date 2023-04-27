@@ -2,7 +2,7 @@ const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
 class Comment extends Model{}
-
+//initializes our model based on the criteria
 Comment.init(
     {
         id: {

@@ -44,9 +44,4 @@ Post.init(
     }
 );
 
-Post.prototype.comments = async function() {
-    const comments = await Comment.findAll({ where: { post_id: this.id }});
-    return comments;
-}
-
 module.exports = Post;

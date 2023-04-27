@@ -1,6 +1,11 @@
 <div class="blog-post">
-    <div class="">
-        <a href="/post/{{id}}"><h2>{{title}}</h2></a>
+    <div class="post-head">
+        {{#if isDashboard}}
+        <a href="/updatePost/{{id}}">
+        {{else}}
+        <a href="/post/{{id}}">
+        {{/if}}
+        <h2>{{title}}</h2></a>
         <p>{{postStamp}}</p>
     </div>
     <p>{{content}}</p>

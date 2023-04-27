@@ -6,7 +6,7 @@ document.querySelector('.signup-form').addEventListener('submit', async (event) 
     const password = document.querySelector('#password-login').value.trim();
 
     if(username && email && password){
-        const response = await fetch('/api/users',{
+        const response = await fetch('/api/user',{
             method: 'POST',
             body: JSON.stringify({ name: username, email: email, password: password }),
             headers: { 'Content-Type': 'application/json' },
