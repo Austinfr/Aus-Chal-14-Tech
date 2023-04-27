@@ -66,14 +66,13 @@ router.get('/newpost', withAuth, (req, res) => {
 //for getting a specific post
 router.get('/post/:id', async (req, res) => {
   try {
-    
-    let postData = await Post.findByPk(req.params.id, { include: Comment });
+    let postData = await Post.findByPk(req.params.id);
 
-    let post = postData.map((post) => post.get({ plain: true }));
-    console.log(post);
+    let post = postData.get({ plain: true });
+    
     res.render('post', { 
       post,
-      logged_in: res.session.logged_in
+      logged_in: req.session.logged_in
     });
 
   } catch (error) {

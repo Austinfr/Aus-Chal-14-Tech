@@ -35,7 +35,7 @@ Comment.init(
             updatedAt: false
         },
         freezeTableName: true,
-        modelName: 'comment'
+        modelName: 'Comment'
     }
 );
 

@@ -39,7 +39,7 @@ Post.init(
             updatedAt: false
         },
         freezeTableName: true,
-        modelName: 'post'
+        modelName: 'Post'
     }
 );
 
