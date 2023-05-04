@@ -27,31 +27,46 @@ router.post('/', async (req, res) => {
 });
 
 router.post('/update/:id', async (req, res) => {
-    const { title, content } = req.body;
-    //gets the current date for the timestamp
-    let now = new Date();
-    
-    //gets our username for the timestamp
-    let userData = await User.findByPk(req.session.user_id);
-    let user = userData.get({plain: true});
+    try{
+        const { title, content } = req.body;
+        //gets the current date for the timestamp
+        let now = new Date();
 
-    //formats the timestamp so that it looks like:
-    // Created by Austin on 04/15/2023
-    let postStamp = `Created by ${user.name} on ${now.getMonth()+1}/${now.getDate()}/${now.getFullYear()}`;
+        //gets our username for the timestamp
+        let userData = await User.findByPk(req.session.user_id);
+        let user = userData.get({plain: true});
 
-    let post = await Post.findByPk(req.params.id);
+        //formats the timestamp so that it looks like:
+        // Created by Austin on 04/15/2023
+        let postStamp = `Created by ${user.name} on ${now.getMonth()+1}/${now.getDate()}/${now.getFullYear()}`;
 
-    if(post){
-        post.title = req.body.title || post.title;
-        post.content = req.body.content || post.content;
+        let post = await Post.findByPk(req.params.id);
 
-        post.postStamp = postStamp;
+        if(post){
+            post.title = req.body.title || post.title;
+            post.content = req.body.content || post.content;
 
-        await post.save();
+            post.postStamp = postStamp;
 
-        res.status(200);
-    } else {
-        res.status(404).json({ message: "Post not found" });
+            await post.save();
+        } else {
+            res.status(404).json({ message: "Post not found" });
+        }
+    }catch(err){
+        console.log(err);
+    }
+});
+
+router.delete('/delete/:id', async (req, res) => {
+    try {
+        let postData = await Post.findByPk(req.params.id);;
+
+        await postData.destroy();
+
+        
+    } catch (err) {
+        console.log(err)
+        res.status(500).json(err);
     }
 });
 
@@ -87,19 +102,6 @@ router.post('/:id/comments', async (req, res) => {
 
     } catch (error) {
         res.status(500).json(error);
-    }
-});
-
-router.delete('/post/:id/delete', async (req, res) => {
-    try {
-      let postData = await Post.findByPk(req.params.id);
-  
-      await postData.destroy();
-  
-      res.redirect('/dashboard');
-      
-    } catch (err) {
-      res.status(500).json(err);
     }
 });
 

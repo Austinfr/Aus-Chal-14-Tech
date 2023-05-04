@@ -49,11 +49,11 @@ nav a:hover {
 .blog-post {
     margin-bottom: 33px;
     padding: 10px;
-    border: #321 5px;
+    border: rgb(117, 80, 42) 5px;
 }
 
 .post-head {
-    background-color: #333;
+    background-color: #6d4e4e;
     color: #eee;
     display: flex;
     padding: 10px;
@@ -77,24 +77,6 @@ ul, li {
     list-style: none;
 }
 
-/* Form styles */
-form label {
-    display: block;
-    margin-bottom: 5px;
-}
-
-form input[type="text"],
-form input[type="password"],
-form textarea {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 20px;
-    border: 2px solid #ddd;
-    border-radius: 4px;
-    box-shadow: 0 0 0 1px #ccc;
-}
-
 button {
     background-color: #333;
     color: #fff;
@@ -110,4 +92,8 @@ a:visited,
 a:active {
     color: #eee;
     text-decoration: none;
+}
+
+.dashboard a{
+    color: #222;
 }
