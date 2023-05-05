@@ -1,4 +1,4 @@
-let logout, deletePostButton, updatePostButton, createPostForm;
+let logout, deletePostButton, updatePostButton, createPostButton;
 
 try{
     logout = document.querySelector('#logout');
@@ -9,11 +9,11 @@ try{
 } catch (err) {}
 
 try {
-    updatePostButton = document.getElementById('updateFormBTN')
+    updatePostButton = document.getElementById('updatePostBTN')
 } catch (err) {}
 
 try {
-    createPostForm = document.getElementById('createFormBTN');
+    createPostButton = document.getElementById('createPostBTN');
 } catch (err) {}
 
 if(logout){
@@ -32,8 +32,8 @@ if(logout){
     });
 }
 
-if(createPostForm){
-    createPostForm.addEventListener('click', async (event) => {
+if(createPostButton){
+    createPostButton.addEventListener('click', async (event) => {
         event.preventDefault();
         
 
@@ -42,20 +42,21 @@ if(createPostForm){
             content: document.getElementById('content').value
         }
 
-        if(!postObject.title || ! postObject.content){
-            alert("You have to put something in both fields!");
-        }
+        if(postObject.title && postObject.content){
+            let response = await fetch('/api/post', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(postObject)
+            }).catch(err => {
+                console.log(err);
+            });
 
-        await fetch('/api/post', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(postObject)
-        }).then(() => {
-            console.log('creayudate');
-            window.location.href = '/dashboard'
-        }).catch(err => {
-            console.log(err);
-        });
+            if(response.ok){
+                window.location.href = '/dashboard';
+            }
+        }else {
+            alert("You need to put something in both fields");
+        }
         
     });
 }
@@ -69,9 +70,6 @@ if(deletePostButton){
         await fetch(`/api/post/delete/${postId}`, {
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json' },
-        }).then(() => {
-            console.log('deup');
-            window.location.href = '/dashboard'
         }).catch(err => {
             console.log(err);
         });
@@ -93,9 +91,6 @@ if(updatePostButton){
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(postObject)
-        }).then(() => {
-            console.log('update');
-            window.location.href = '/dashboard'
         }).catch(err => {
             console.log(err);
         });

@@ -6,12 +6,17 @@ devoloping a mvc tech blog where users can upload posts and comment and talk wit
 
 ## TOC/Links
 
+- [goal](#goal)
 - [Installation](#installation)
 - [Usage](#usage)
 - [Contribution](#contribution)
 - [Testing](#testing)
 - [License](#license)
 - [Questions](#questions)
+
+## Goal
+
+The goal of this project is to display mvc through the use of sequelize as the models, handlebars as the views and express/sequelize as the controller to create a functioning Tech blog which can be used to post and comment, update and delete posts all to create a community where people can talk about tech.
 
 ## Installation
 

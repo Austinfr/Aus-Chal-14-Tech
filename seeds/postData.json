@@ -2,19 +2,16 @@
     {
         "title": "Javascript is fun!",
         "content": "I like coding in the Javascript language and learning all about how to use and apply it",
-        "user_id": 1,
-        "postStamp": "Created by Sonic on 4/15/2023"
+        "user_id": 1
     },
     {
         "title": "Sequelize is tough",
         "content": "Applying sequalize to the concepts of sql is not that easy to grasp",
-        "user_id": 1,
-        "postStamp": "Created by Sonic on 4/15/2023"
+        "user_id": 2
     },
     {
         "title": "I like graham crackers",
         "content": "Just thought I'd mention it",
-        "user_id": 1,
-        "postStamp": "Created by Sonic on 4/15/2023"
+        "user_id": 1
     }
 ]
