@@ -1,4 +1,8 @@
-let login, logout, deletePostButton, updatePostButton, createPostButton;
+let home, dashboard, login, logout, deletePostButton, updatePostButton, createPostButton;
+
+home = document.getElementById('home');
+
+dashboard = document.getElementById('dashboard');
 
 try {
     login = document.getElementById('login');
@@ -19,6 +23,20 @@ try {
 try {
     createPostButton = document.getElementById('createPostBTN');
 } catch (err) {}
+
+home.addEventListener('click', event => {
+    event.preventDefault();
+    if(window.location.pathname !== '/'){
+        window.location.href = '/';
+    }
+});
+
+dashboard.addEventListener('click', event => {
+    event.preventDefault();
+    if(window.location.pathname !== '/dashboard'){
+        window.location.href = '/dashboard';
+    }
+});
 
 if(login){
     login.addEventListener('click', (event) => {
