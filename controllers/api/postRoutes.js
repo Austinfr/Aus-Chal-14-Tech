@@ -20,6 +20,9 @@ router.post('/', async (req, res) => {
     try {
       // Create a new post for the current user
       const post = await Post.create({ title, content, user_id, postStamp});
+      if(post){
+        console.log('Post created successfully');
+      }
       res.redirect(`/dashboard`);
     } catch (err) {
       res.status(500).send('Unable to create post');
@@ -28,7 +31,7 @@ router.post('/', async (req, res) => {
 
 router.post('/update/:id', async (req, res) => {
     try{
-        const { title, content } = req.body;
+        const postData = req.body;
         //gets the current date for the timestamp
         let now = new Date();
 
@@ -42,13 +45,13 @@ router.post('/update/:id', async (req, res) => {
 
         let post = await Post.findByPk(req.params.id);
 
+        postData.postStamp = postStamp;
+        
         if(post){
-            post.title = req.body.title || post.title;
-            post.content = req.body.content || post.content;
+            await post.update(postData);
 
-            post.postStamp = postStamp;
+            res.redirect('/dashboard');
 
-            await post.save();
         } else {
             res.status(404).json({ message: "Post not found" });
         }
@@ -63,6 +66,7 @@ router.delete('/delete/:id', async (req, res) => {
 
         await postData.destroy();
 
+        res.redirect('/dashboard');
         
     } catch (err) {
         console.log(err)

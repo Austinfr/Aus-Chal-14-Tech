@@ -51,6 +51,7 @@ if(createPostForm){
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(postObject)
         }).then(() => {
+            console.log('creayudate');
             window.location.href = '/dashboard'
         }).catch(err => {
             console.log(err);
@@ -69,6 +70,7 @@ if(deletePostButton){
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json' },
         }).then(() => {
+            console.log('deup');
             window.location.href = '/dashboard'
         }).catch(err => {
             console.log(err);
@@ -92,6 +94,7 @@ if(updatePostButton){
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(postObject)
         }).then(() => {
+            console.log('update');
             window.location.href = '/dashboard'
         }).catch(err => {
             console.log(err);
