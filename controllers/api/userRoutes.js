@@ -56,7 +56,9 @@ router.post('/login', async (req, res) => {
 });
 
 //logout route
-router.get('/logout', (req, res) => {
+router.post('/logout', (req, res) => {
+
+  console.log(req.session);
   //if we're logged in
   if (req.session.logged_in) {
     //we set the logged in to false and get rid of the session variable
@@ -64,6 +66,8 @@ router.get('/logout', (req, res) => {
     req.session.destroy(() => {
       res.status(204).end();
     });
+
+    res.redirect('/login');
 
   } else {
     res.status(404).end();

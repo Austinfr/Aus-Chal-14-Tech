@@ -34,7 +34,8 @@ nav {
     background-color: #333;
 }
 
-nav a {
+nav a ,
+nav button{
     margin-right: 20px;
     text-decoration: none;
     color: #fff;

@@ -24,7 +24,7 @@ if(login){
     login.addEventListener('click', (event) => {
         event.preventDefault();
 
-        document.location.replace('/login');
+        window.location.href = '/login';
     });
 }
 
@@ -37,7 +37,7 @@ if(logout){
         });
         
         if (response.ok) {
-            document.location.replace('/login');
+            window.location.href = '/login';
         } else {
             alert(response.statusText);
         }
@@ -55,7 +55,7 @@ if(createPostButton){
         }
 
         if(postObject.title && postObject.content){
-            let response = await fetch('/api/post', {
+            const response = await fetch('/api/post', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(postObject)
@@ -79,12 +79,16 @@ if(deletePostButton){
 
         let postId = deletePostButton.getAttribute('data-id');
 
-        await fetch(`/api/post/delete/${postId}`, {
+        const response = await fetch(`/api/post/delete/${postId}`, {
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json' },
         }).catch(err => {
             console.log(err);
         });
+
+        if(response.ok){
+            window.location.href = '/dashboard';
+        }
     });
 }
 
@@ -99,12 +103,16 @@ if(updatePostButton){
             content: document.getElementById('content').value
         };
 
-        await fetch(`/api/post/update/${postId}`, {
+        const response = await fetch(`/api/post/update/${postId}`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(postObject)
         }).catch(err => {
             console.log(err);
         });
+
+        if(response.ok){
+            window.location.href = '/dashboard';
+        }
     });
 }

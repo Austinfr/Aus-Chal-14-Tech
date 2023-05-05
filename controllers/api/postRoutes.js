@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { Post, User, Comment } = require('../../models');
+const { destroy } = require('../../models/User');
 
 // Handle create post form submission
 router.post('/', async (req, res) => {
@@ -19,9 +20,9 @@ router.post('/', async (req, res) => {
   
     try {
       // Create a new post for the current user
-      await Post.create({ title, content, user_id, postStamp});
+      const post = await Post.create({ title, content, user_id, postStamp});
 
-      res.status(200);
+      res.status(200).json(post);
     } catch (err) {
       res.status(500).send('Unable to create post');
     }
@@ -49,7 +50,7 @@ router.post('/update/:id', async (req, res) => {
 
         post.save();
         
-        return res.status(200);
+        res.status(200).json(post);
 
     }catch(err){
         console.log(err);
@@ -60,9 +61,9 @@ router.delete('/delete/:id', async (req, res) => {
     try {
         let postData = await Post.findByPk(req.params.id);;
 
-        await postData.destroy();
+        const destroyed = await postData.destroy();
 
-        return res.status(200);
+        res.status(200).json(destroyed);
         
     } catch (err) {
         console.log(err)
@@ -98,7 +99,7 @@ router.post('/:id/comments', async (req, res) => {
         }
 
         //shows you the post with the comment added
-        res.redirect(`/post/${req.params.id}`);
+        res.status(200).json(response);
 
     } catch (error) {
         res.status(500).json(error);
