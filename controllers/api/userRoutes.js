@@ -64,8 +64,6 @@ router.get('/logout', (req, res) => {
     req.session.destroy(() => {
       res.status(204).end();
     });
-    //puts us back to the login page
-    res.redirect('/login');
 
   } else {
     res.status(404).end();

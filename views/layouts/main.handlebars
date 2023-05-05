@@ -17,9 +17,9 @@
         <a href="/">Home</a>
         <a href="/dashboard">Dashboard</a>
         {{#if logged_in}}
-          <a href="/api/user/logout" id="logout">Logout</a>
+          <button id="logout">Logout</button>
         {{else}}
-          <a href="/login">Login</a>
+          <button id="login">Login</button>
         {{/if}}
       </section>
 

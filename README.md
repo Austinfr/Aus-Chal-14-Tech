@@ -26,6 +26,8 @@ You can either just visit the website ore if you want to host one locally you wi
 
 Either visit the website and see what posts you can make or after installing what you need above, install the packages and run seeds then start the server
 
+[Web Link](https://aus-chal-14-tech.herokuapp.com/)
+
 ## Contribution
 
 You can send any comments or feedback to either of the [links below](#questions)

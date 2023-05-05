@@ -1,7 +1,11 @@
-let logout, deletePostButton, updatePostButton, createPostButton;
+let login, logout, deletePostButton, updatePostButton, createPostButton;
+
+try {
+    login = document.getElementById('login');
+} catch (err) {}
 
 try{
-    logout = document.querySelector('#logout');
+    logout = document.getElementById('logout');
 } catch (err) {}
 
 try{
@@ -15,6 +19,14 @@ try {
 try {
     createPostButton = document.getElementById('createPostBTN');
 } catch (err) {}
+
+if(login){
+    login.addEventListener('click', (event) => {
+        event.preventDefault();
+
+        document.location.replace('/login');
+    });
+}
 
 if(logout){
     logout.addEventListener('click', async (event) => {
